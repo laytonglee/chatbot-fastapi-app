@@ -12,11 +12,17 @@ This project uses **FastAPI**, **Docker**, and **Render** for automatic deployme
 ## 📁 Project Structure
 
 ```
-project/
+chatbot-fastapi-app/
 │── app/
+│    ├── models/
+│    │    ├── faq_with_embeddings.joblib
+│    │    └── pipeline_svm.joblib
+│    ├── chatbot.py
 │    └── main.py
-│── requirements.txt
+│── frontend/
+│    └── index.html
 │── Dockerfile
+│── requirements.txt
 │── README.md
 ```
 
@@ -24,8 +30,8 @@ project/
 
 ## 🚀 Deployment (GitHub → Render)
 
-### Step 1 — Push your code to GitHub
-Make sure your `Dockerfile` and FastAPI app are in the root directory.
+### Step 1 — Push code to GitHub
+Make sure `Dockerfile` and FastAPI app are in the root directory.
 
 ### Step 2 — Create a Render Web Service
 1. Go to [Render.com](https://render.com) → **New Web Service**
@@ -43,32 +49,17 @@ Render will build and run:
 uvicorn app.main:app --host 0.0.0.0 --port 8000
 ```
 
-Make sure you include a root endpoint so Render's health check passes:
-
-```python
-@app.get("/")
-def root():
-    return {"status": "AUPP Chatbot running"}
-```
-
 ---
 
 ## 🌐 API Endpoint
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| GET    | `/`      | Health check |
+| GET    | `/`      | Go to Home Page |
 | POST   | `/chat`  | Ask chatbot |
 
 ---
 
-## 🔗 Frontend Connection
-
-Replace local URL with your Render domain:
-
-```javascript
-fetch("https://your-service.onrender.com/chat")
-```
 
 ---
 
@@ -80,16 +71,6 @@ Every push to `main` triggers:
 3. ✅ Start FastAPI server
 4. ✅ Deploy new version
 
----
-
-## ✨ Done!
-
-Your **AUPP FAQ chatbot** now auto-deploys to the cloud every time you update the `main` branch.
-
----
-
-### 📝 License
-MIT License
 
 ### 👥 Contributors
-Made with ❤️ by the AUPP Team
+This is an academic project developed as part of ITM 454 course at AUPP.
